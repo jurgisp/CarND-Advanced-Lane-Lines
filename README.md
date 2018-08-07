@@ -66,7 +66,7 @@ The code for this step is in the **Perspective transform** section of the notebo
 
 I used [`straight_lines.jpg`](output_images/straight_lines1_undist.jpg) distortion-corrected image to manually mark a trapezoid along the straight lines - its corners are `[[195, 720], [570, 466], [714, 466], [1116, 720]]`.
 
-I defined destination points in the warped image to be `[[640+(195-640)*0.75, 720], [640+(195-640)*0.75, 300], [640+(1116-640)*0.75, 300], [640+(1116-640)*0.75, 720]]`. The rationale for new `x` coordinates to be `195*1.5` and `1280-(1280-1116)*1.5` is to push the lines towards the center, but keeping the center of the image unchanged, since we are o assume that the center of the image is actually the center of the car. I found this assumption to not be entirely correct, since in the final result I found a systematic offset from the center, but oh well. The rationale for top `y` at `300` is to get a longer portion of the line into the warped image than the marked trapezoid.
+I defined destination points in the warped image to be `[[640+(195-640)*0.75, 720], [640+(195-640)*0.75, 300], [640+(1116-640)*0.75, 300], [640+(1116-640)*0.75, 720]]`. The rationale to pick new `x` coordinates at `640+(195-640)*0.75` and `640+(1116-640)*0.75` is to push the lines towards the center, but keeping the center of the image unchanged, since we are o assume that the center of the image is actually the center of the car. I found this assumption to not be entirely correct, since in the final result I found a systematic offset from the center, but oh well. The rationale for top `y` at `300` is to get a longer portion of the line into the warped image than the marked trapezoid.
 
 This resulted in the following source and destination points:
 
@@ -148,7 +148,9 @@ Besides the steps already described, it uses function `unwarp_transform_p()` to 
 The final step to process a video reliably was to handle small occasional glitches, when the fit is incorrect. A simple [exponential smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) of the coefficients with `alpha=0.2`, defined in `update_coef()` function, worked well.
 
 Here is the final output video on YouTube:
+
 [![project video](https://img.youtube.com/vi/yfm9Zs7ocIw/0.jpg)](https://www.youtube.com/watch?v=yfm9Zs7ocIw&)
+
 and [mp4 file](output_videos/project_video.mp4).
 
 ---
@@ -160,3 +162,5 @@ and [mp4 file](output_videos/project_video.mp4).
 I'm very happy with the pipeline and the curve-fitting approach that I found.
 
 Perhaps the only drawback that it's quite slow - takes 300ms to process one frame. A large part of it is due to Gaussian smoothing with `sigma=20`, which produces a huge kernel. The `minimize()` calls also take some time, but they are relatively fast. I think the performance of both pieces can be quite easily improved by shrinking the image size significantly.
+
+The pipeline fails, however, quite miserably on `challenge_video.mp4`. I think it's because the lane is narrower, and there are features on the road (the wall, shadow, differences in surface) which get picked up by the thresholding and get mistaken for a line. Probably would need to work harder on producing a good thresholded binary image. Also, one would probably need to improve curve-fitting, perhaps by selecting more cleverly between different local minima, and building in expectation, for where the lane is most likely to be.
