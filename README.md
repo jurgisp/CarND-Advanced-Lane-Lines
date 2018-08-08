@@ -132,12 +132,12 @@ The full image pipeline is defined in notebook section **Pipeline** which define
 
 Besides the steps already described, it uses function `unwarp_transform_p()` to map polynomial pixels back to distortion-corrected image. The two lane polynomials are overlayed, together with the geometry information:
 
-![test1_output](output_images/test1.jpg)
-![test2_output](output_images/test2.jpg)
-![test3_output](output_images/test3.jpg)
-![test4_output](output_images/test4.jpg)
-![test5_output](output_images/test5.jpg)
-![test6_output](output_images/test6.jpg)
+![test1_output](output_images/test1_fill.jpg)
+![test2_output](output_images/test2_fill.jpg)
+![test3_output](output_images/test3_fill.jpg)
+![test4_output](output_images/test4_fill.jpg)
+![test5_output](output_images/test5_fill.jpg)
+![test6_output](output_images/test6_fill.jpg)
 
 ---
 
