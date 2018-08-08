@@ -149,7 +149,7 @@ The final step to process a video reliably was to handle small occasional glitch
 
 Here is the final output video on YouTube:
 
-[![project video](https://img.youtube.com/vi/yfm9Zs7ocIw/0.jpg)](https://www.youtube.com/watch?v=yfm9Zs7ocIw&)
+[![project video](https://img.youtube.com/vi/TCwLMjJpEdc/0.jpg)](https://www.youtube.com/watch?v=TCwLMjJpEdc&)
 
 and [mp4 file](output_videos/project_video.mp4).
 
